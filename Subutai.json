@@ -1,0 +1,36 @@
+{
+    "name": "nextcloud-subutai",
+    "description": "A blueprint for creating a NextCloud installation",
+    "nodes": [{
+        "name": "web-host",
+        "template": "nginx",
+        "peer_group": "MASTER-GROUP-1",
+        "size": "MEDIUM",
+        "expose": [{
+            "protocol": "https",
+            "domain": "rbs.stage-hub.net",
+            "port_int": "80",
+            "port_ext": "443"
+        }, {
+            "protocol": "tcp",
+            "domain": "rbs.stage-hub.net",
+            "port_int": "22",
+            "port_ext": "2222"
+        }]
+    }, {
+        "name": "datastore",
+        "template": "postgresql",
+        "peer_group": "MASTER-GROUP-1",
+        "size": "LARGE"
+    }],
+    "peerGroups": [{
+        "name": "MASTER-GROUP-1",
+        "pricingPref": {
+            "maxPrice": "5"
+        }
+    }],
+    "sshKey": "rschulman",
+    "configuration": {
+        "playbook": "https://github.com/rschulman/nextcloud_blueprint/archive/master.zip",
+        "script": "main.yaml"
+    }

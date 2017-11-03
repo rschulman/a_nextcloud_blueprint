@@ -1,0 +1,13 @@
+---
+ - name: Install nginx and NextCloud
+   hosts: nginx
+   remote_user: root
+   tasks:
+     - name: install nginx
+       apt:
+         name: nginx
+         state: present
+     - name: install php
+       apt:
+         name: php-fpm
+         state: present
